@@ -7,7 +7,7 @@ from sklearn.preprocessing import RobustScaler
 from sklearn.cluster import KMeans
 
 
-def macs_pca_feature(df, cols, pcs, clusters, prefix):
+def macs_pca_features(df, cols, pcs, clusters, prefix):
      
      #add a function/functionality to 
      #vizualize sufficient pcs
@@ -32,5 +32,20 @@ def macs_pca_feature(df, cols, pcs, clusters, prefix):
      return df
 
 
+———————-———————-———————-———————-
 
+
+def macs_featImpClf(X, y, clfs, features):
+
+    # going to take in classifiers and 
+    # features and return df
+
+
+    for clf in clfs:
+       model = clf
+       model.fit(X[features], y)
+       
+       for feat, imp in zip(features, model.feature_importances_):
+          
+       
      
