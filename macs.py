@@ -8,9 +8,12 @@ from sklearn.cluster import KMeans
 
 
 def macs_pca_feature(df, cols, pcs, clusters, prefix):
+     
+     #add a function/functionality to 
+     #vizualize sufficient pcs
 
      ‘’’
-      takes in a df. columns to reduce dimensions, how many dimensions to reduce to, and how many clusters to make.
+      takes in a df. columns to reduce   dimensions, how many dimensions to reduce to, and how many clusters to make.
      ‘’’
      df = df.copy()
 
@@ -27,6 +30,7 @@ def macs_pca_feature(df, cols, pcs, clusters, prefix):
          df[prefix + str(pcs) + ‘PCs_’ + str(cluster) + ‘Means_Cluster] = km.labels_
 
      return df
+
 
 
      
