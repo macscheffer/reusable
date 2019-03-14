@@ -48,4 +48,28 @@ def macs_featImpClf(X, y, clfs, features):
        for feat, imp in zip(features, model.feature_importances_):
           
        
-     
+
+
+
+
+————————-————————-————————-————————-
+
+
+def macs_pred_intro(df, cols, target, dummys=True, encoded_col=False):
+
+
+     # takes in a df, the cols to look through, and the target values. 
+
+     # returns a df of information on features relation to target and eachother
+     majority_class = df.target.mean()
+
+     top2s = {}
+     for col in cols:
+        piv_idx = df.pivot_table(index=col, values=target).index.tolist()
+        piv_val = df.pivot_table(index=col, values=target).values().tolist()
+        
+        counts_idx = df[column].value_counts().index.tolist()
+        counts_val = df[column].value_counts().values.tolist()
+        
+        # continue here 
+        
