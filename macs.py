@@ -42,5 +42,7 @@ def macs_pca_features(df, cols, pcs, clusters, prefix):
      
 # a function to split a pandas datetime column into a different date columns (year, month, day, day of week, day of year)
 
+# outlier detection function. can remove outlier rows or can add "is outlier" function. 
+
 
         
