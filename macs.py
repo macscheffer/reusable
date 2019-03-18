@@ -44,5 +44,4 @@ def macs_pca_features(df, cols, pcs, clusters, prefix):
 
 # outlier detection function. can remove outlier rows or can add "is outlier" function. 
 
-
-        
+# create a function to set display options.
