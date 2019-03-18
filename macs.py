@@ -41,6 +41,20 @@ def macs_pca_features(df, cols, pcs, clusters, prefix):
      # for example is the house big and in a good neighborhood and has a lot of bathrooms
      
 # a function to split a pandas datetime column into a different date columns (year, month, day, day of week, day of year)
+def date_to_features(col, df=df, drop=False):
+    
+    datetime = pd.to_datetime(df[col])
+    df['datetime_year'] = datetime.dt.year
+    df['datetime_month'] = datetime.dt.month
+    df['datetime_dayofweek'] = datetime.dt.dayofweek
+    
+    df['datetime_dayofyear'] = datetime.dt.dayofyear
+    df['datetime_quarter'] = datetime.dt.quarter
+    df['datetime_weekofyear'] = datetime.dt.weekofyear
+    
+    if drop == True:
+        return df.drop(columns=col)
+    return df
 
 # outlier detection function. can remove outlier rows or can add "is outlier" function. 
 
