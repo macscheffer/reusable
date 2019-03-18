@@ -5,6 +5,10 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import RobustScaler
 from sklearn.cluster import KMeans
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+import random
 
 
 def macs_pca_features(df, cols, pcs, clusters, prefix):
@@ -66,9 +70,75 @@ def macs_labelEncode_meaningful(df, train, cols, target):
           df['MeaningfulEnc_' + col] = df[col].map(mapper_dic)
         
      return df
-# a feature importance and performance evaluation function
-     # will return a dataframe to analyze to find out what features are good at what
-     
+
+
+##################################################################################################################################
+
+def classifers_evaluator(df, base_features, features_to_try, select_features, target, classifiers, iters, testSize):
+    
+    # is for evaluating classification models. 
+    
+    # classifiers takes in a list of possible classifiers and features.
+    
+    
+    
+    X = df
+    y = df.target
+    
+    perf_dfs = []
+    
+    for i in range(0, iters):
+        
+        features_to_use = base_features + random.sample(features_to_try, select_features)
+        X_sub = X[features_to_use]
+        
+        
+        X_train, X_test, y_train, y_test = train_test_split(X_sub, y, test_size=testSize)
+        
+        
+        for clf in classifiers:
+            
+            model = clf
+            model.fit(X_train, y_train)
+            
+            preds = model.predict(X_test)
+            
+            
+            model_type = []
+            accs = []
+            feats = [] 
+            coefs = []
+            
+            if 'Logistic' in str(clf):
+                for feat, coef in zip(X_train.columns, model.coef_[0]):
+                    model_type.append(str(clf))
+                    accs.append(accuracy_score(y_test, preds))
+                    feats.append(feat)
+                    coefs.append(abs(coef))
+                    
+            if 'RandomForestClassifier' in str(clf):
+                for feat, coef in zip(X_train.columns, model.feature_importances_):
+                    model_type.append(str(clf))
+                    accs.append(accuracy_score(y_test, preds))
+                    feats.append(feat)
+                    coefs.append(abs(coef))
+            
+            
+            feature_coef_dict = {
+            'model_type': model_type,
+            'accuracy': accs,
+            'feature':feats,
+            'coefs': coefs}
+            
+            perf_dfs.append(pd.DataFrame(feature_coef_dict))
+            
+    performance_df = pd.concat(perf_dfs)
+    
+    return performance_df
+
+##################################################################################################################################
+
+
 # a create important boolean features function
      # it returns a dataframe with extra "dummy" features that combines feature and columns
      # for example is the house big and in a good neighborhood and has a lot of bathrooms
