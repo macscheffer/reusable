@@ -33,43 +33,12 @@ def macs_pca_features(df, cols, pcs, clusters, prefix):
      return df
 
 
+# a feature importance and performance evaluation function
+     # will return a dataframe to analyze to find out what features are good at what
+     
+# a create important boolean features function
+     # it returns a dataframe with extra "dummy" features that combines feature and columns
+     # for example is the house big and in a good neighborhood and has a lot of bathrooms
+     
 
-
-def macs_featImpClf(X, y, clfs, features):
-
-    # going to take in classifiers and 
-    # features and return df
-
-
-    for clf in clfs:
-       model = clf
-       model.fit(X[features], y)
-       
-       for feat, imp in zip(features, model.feature_importances_):
-          
-       
-
-
-
-
-————————-————————-————————-————————-
-
-
-def macs_pred_intro(df, cols, target, dummys=True, encoded_col=False):
-
-
-     # takes in a df, the cols to look through, and the target values. 
-
-     # returns a df of information on features relation to target and eachother
-     majority_class = df.target.mean()
-
-     top2s = {}
-     for col in cols:
-        piv_idx = df.pivot_table(index=col, values=target).index.tolist()
-        piv_val = df.pivot_table(index=col, values=target).values().tolist()
-        
-        counts_idx = df[column].value_counts().index.tolist()
-        counts_val = df[column].value_counts().values.tolist()
-        
-        # continue here 
         
