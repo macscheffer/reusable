@@ -40,5 +40,7 @@ def macs_pca_features(df, cols, pcs, clusters, prefix):
      # it returns a dataframe with extra "dummy" features that combines feature and columns
      # for example is the house big and in a good neighborhood and has a lot of bathrooms
      
+# a function to split a pandas datetime column into a different date columns (year, month, day, day of week, day of year)
+
 
         
