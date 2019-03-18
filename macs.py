@@ -147,3 +147,5 @@ def classifers_evaluator(df, base_features, features_to_try, select_features, ta
 # outlier detection function. can remove outlier rows or can add "is outlier" function. 
 
 # create a function to set display options.
+
+# create an age bucket function.
