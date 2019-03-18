@@ -138,6 +138,16 @@ def classifers_evaluator(df, base_features, features_to_try, select_features, ta
 
 ##################################################################################################################################
 
+def square_features(df, features):
+    
+    # takes in a list of features and squares them creating a new column in a df.
+    # returns the dataframe.
+    for feature in features:
+        df[str(feature) + '_squared'] = df[feature] ** 2
+    
+    return df
+
+##################################################################################################################################
 
 # a create important boolean features function
      # it returns a dataframe with extra "dummy" features that combines feature and columns
