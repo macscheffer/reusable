@@ -175,7 +175,7 @@ def mac_create_dummies_meaningful(df, train, cols, target, target_mean_value, cu
     for col in cols:
         
         for k, v in zip((abs(train.pivot_table(index=col, values=target) - target_mean_value) > cutoff).index.tolist(),
-                        (abs(train.pivot_table(index=col, values=target) - target_mean_value) > cutoff).target.values):
+                        (abs(train.pivot_table(index=col, values=target) - target_mean_value) > cutoff)[target].values):
             if v:
                 train['dummy_' + col + str(k)] = (train[col] == k)
                 df['dummy_' + col + str(k)] = (df[col] == k)
